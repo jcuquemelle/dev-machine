@@ -1,0 +1,4 @@
+.vagrant/machines/*
+*~
+now.txt
+*.retry
