@@ -16,7 +16,7 @@
 
 - name: Add miniconda to the PATH
   lineinfile:
-    dest: "/home/{{ host_user }}/.bashrc"
+    dest: "/home/vagrant/.bashrc"
     line: "export PATH={{ miniconda_home }}/bin:$PATH"
     create: yes
 

@@ -90,7 +90,7 @@ Vagrant.configure("2") do |config|
   #This provisioning also installs ansible in the guest
   #it enables ansible provisioning directly from the guest, as ansible is
   #not officially supported and cumbersome to install on a Windows host
-  config.vm.provision "shell", path: "provisioning/provision-base.sh"
+  config.vm.provision "shell", path: "provisioning/install-ansible.sh"
   
   #do the actual provisioning
   _host_user = `id -u -n`.chomp

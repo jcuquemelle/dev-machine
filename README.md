@@ -5,6 +5,8 @@ basic vagrant file and ansible roles to provision a development environment
 
 sample role: miniconda with basic scientific stack
  
+# Run ansible provisioning only: 
+- sudo ansible-playbook provisioning/ansible/main.yml --tags "python" 
 
 CREDITS
 
