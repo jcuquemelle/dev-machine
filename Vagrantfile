@@ -56,6 +56,11 @@ Vagrant.configure("2") do |config|
     # Customize hardware on the VM:
     vb.memory = "4096"
     vb.cpus   = 2
+    vb.customize ["modifyvm", :id, "--vram", "64"]
+    # Enable the use of hardware virtualization extensions (Intel VT-x or AMD-V) in the processor of your host system
+    vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+    # (Needs Guest Additions) hardware 3D acceleration
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
   end
 
   # SSh is not enabled through ssh forwarding, as it doesn't work for a login session 
