@@ -65,16 +65,6 @@ Vagrant.configure("2") do |config|
 
   #Set my timezone
   config.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", run: "always"
-  # SSh is not enabled through ssh forwarding, as it doesn't work for a login session 
-  # from the UI
-  # the Ansible provisioning will copy the content of the .ssh folder of the user
-  # to the target VM
-  #
-  # Enable provisioning with a shell script.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
 
   # disable the apt-daily systemd service (avoid lock dpkg before the provisioning)
   # https://medium.com/@koalallama/vagrant-up-failing-could-not-get-lock-var-lib-dpkg-lock-13c73225782d#.4pe85ug76
@@ -99,7 +89,7 @@ Vagrant.configure("2") do |config|
   #not officially supported and cumbersome to install on a Windows host
   config.vm.provision "shell", path: "provisioning/install-ansible.sh"
   
-  #do the actual provisioning
+  #do the actual provisioning, passing host username as a first argument just in case
   _host_user = `id -u -n`.chomp
   config.vm.provision :shell do |shell|
 	shell.path = "provisioning/run-ansible-playbook.sh"
