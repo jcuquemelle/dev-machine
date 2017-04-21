@@ -63,6 +63,8 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
   end
 
+  #Set my timezone
+  config.vm.provision :shell, :inline => "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime", run: "always"
   # SSh is not enabled through ssh forwarding, as it doesn't work for a login session 
   # from the UI
   # the Ansible provisioning will copy the content of the .ssh folder of the user
