@@ -1,0 +1,49 @@
+---
+# tasks file for miniconda role
+
+- name: Download miniconda python distribution
+  sudo: False
+  get_url: 
+    url: http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh 
+    dest: /tmp/miniconda.sh 
+    mode: 0755
+
+- name: Execute the miniconda setup script
+  sudo: True
+  shell: /tmp/miniconda.sh -b -p {{ miniconda_home }} creates={{ miniconda_home }} executable=/bin/bash
+  notify:
+    - remove miniconda setup script
+
+- name: Add miniconda to the PATH
+  lineinfile:
+    dest: "/home/{{ host_user }}/.bashrc"
+    line: "export PATH={{ miniconda_home }}/bin:$PATH"
+    create: yes
+
+- name: Update conda to latest version
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda update conda --yes -q executable=/bin/bash"
+
+- name: Install Pip
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda install pip --yes -q executable=/bin/bash"
+
+- name: Install NumPy
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda install numpy --yes -q executable=/bin/bash"
+
+- name: Install Pandas
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda install pandas --yes -q executable=/bin/bash"
+
+- name: Install Statsmodel
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda install statsmodels --yes -q executable=/bin/bash"
+
+- name: Install Scikit-learn
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda install scikit-learn --yes -q executable=/bin/bash"
+
+- name: Install Jupyter
+  sudo: True
+  shell: "{{ miniconda_home }}/bin/conda install jupyter --yes -q executable=/bin/bash"

@@ -1,0 +1,12 @@
+---
+- name: provision devBox
+  hosts: local
+  user: vagrant
+  sudo: yes
+ 
+  roles:
+  - { role: anaconda, tags: [ 'python' ]}
+
+  post_tasks:
+    - name: timestamp the execution of ansible
+      shell: date >> now.txt
