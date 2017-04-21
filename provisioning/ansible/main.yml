@@ -5,6 +5,7 @@
   sudo: yes
  
   roles:
+  - { role: basics, tags: [ 'basics' ]}
   - { role: anaconda, tags: [ 'python' ]}
 
   post_tasks:
